@@ -11,7 +11,6 @@
         <maven.compiler.target>8</maven.compiler.target>
         <junit.version>5.11.3</junit.version>
         <selenide.version>7.6.1</selenide.version>
-        <selenium.version>4.27.0</selenium.version>
         <allure.version>2.29.1</allure.version>
     </properties>
 
@@ -38,20 +37,6 @@
             <version>${allure.version}</version>
         </dependency>
 
-        <!-- Selenium Java dependency -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-
-                     <!-- Selenium Api dependency -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-api</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-
         <!-- WebDriver Manager for automatic driver management -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
@@ -64,12 +49,6 @@
             <artifactId>allure-junit5</artifactId>
             <version>${allure.version}</version>
             <scope>test</scope>
-        </dependency>
-
-                     <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-            <version>${selenium.version}</version>
         </dependency>
 
         <dependency>
