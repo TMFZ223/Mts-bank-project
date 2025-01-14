@@ -1,0 +1,50 @@
+name: Run Tests
+
+on:
+  schedule:
+    - cron: '50 17 * * *' # Запуск каждый день в 17:50
+
+jobs:
+  Run_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Скачивание selenoid"
+        run: curl -s https://aerokube.com/cm/bash | bash
+
+      - name: "Расширение прав на запуск Selenoid"
+        run: chmod +x ./cm
+
+      - name: "Запуск selenoid"
+        run: ./cm selenoid start --vnc
+
+      - name: "Запуск selenoid-ui"
+        run: ./cm selenoid-ui start
+
+      - name: Используем maven репозиторий
+        uses: actions/checkout@v3
+
+      - name: Очистка проекта
+        run: mvn clean
+
+      - name: Запуск тестов
+        run: mvn test
+        continue-on-error: true
+
+      - name: Генерация Allure отчета
+        uses: simple-elf/allure-report-action@master
+        id: allure-report
+        with:
+          allure_results: allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+
+      - name: Развертывание на GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          publish_branch: gh-pages
+          destination_dir: allure-report
