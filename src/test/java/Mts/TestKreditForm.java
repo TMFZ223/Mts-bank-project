@@ -118,10 +118,10 @@ private  String aboutSmsCodeText = "Код подтверждения отпра
         mainPage.goKreditLink();
         kreditPage.GoloanCalcLink();
         kreditFormPage.enterClientFio(clientFio);
-                kreditFormPage.enterBirthdate(clientBirdthdate);
-                kreditFormPage.enterClientPhoneNumber(clientPhoneNumber);
-                kreditFormPage.clickNextButton();
+        kreditFormPage.enterBirthdate(clientBirdthdate);
+        kreditFormPage.enterClientPhoneNumber(clientPhoneNumber);
+        kreditFormPage.clickNextButton();
         expectedMessage = "Для подачи заявки необходимо дать согласие на этот пункт";
-  kreditFormPage.checkConfirmationMessage(expectedMessage);
+        kreditFormPage.checkConfirmationMessage(expectedMessage);
     }
 }
