@@ -1,8 +1,7 @@
 name: Run Tests
 
 on:
-  schedule:
-    - cron: '40 15 * * *' # Запуск каждый день в 15:40
+  push
 
 jobs:
   Run_tests:
