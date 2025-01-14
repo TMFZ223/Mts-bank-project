@@ -45,6 +45,13 @@
             <version>${selenium.version}</version>
         </dependency>
 
+                     <!-- Selenium Api dependency -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+
         <!-- WebDriver Manager for automatic driver management -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
