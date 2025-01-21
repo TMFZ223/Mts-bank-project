@@ -9,30 +9,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 @Epic("Попарное тестирование фильтров офисов и банкоматов")
-public class TestMap {
-    private Preconditions preconditions;
-    private PostConditions postConditions;
+public class TestMap extends  BaseTest {
     private MainPage mainPage;
     private MapPage mapPage;
 
     public TestMap() {
         this.mainPage = new MainPage();
         this.mapPage = new MapPage();
-        this.preconditions = new Preconditions();
-        this.postConditions = new PostConditions();
-    }
-
-    @BeforeEach
-    public void setUp() {
-        preconditions.openChrome();
-        preconditions.goToUrl();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        postConditions.clearCookies();
-        postConditions.clearLocalStorage();
-        postConditions.closeBrowser();
     }
 
     @ParameterizedTest

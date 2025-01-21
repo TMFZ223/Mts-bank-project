@@ -1,5 +1,6 @@
 package Mts;
 
+import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import org.junit.jupiter.api.AfterEach;
@@ -11,12 +12,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @Epic("Тестирование формы оформления кредита наличными онлайн")
-public class TestKreditForm {
+public class TestKreditForm extends BaseTest {
     private String clientFio = "Сидоров Константин Егорович";
     private String clientBirdthdate = "24.01.2000";
     private  String clientPhoneNumber = "915 220-29-38";
-    private  Preconditions preconditions;
-    private  PostConditions  postConditions;
     private  MainPage mainPage;
     private  KreditPage kreditPage;
     private KreditFormPage kreditFormPage;
@@ -29,21 +28,6 @@ private  String aboutSmsCodeText = "Код подтверждения отпра
         this.kreditPage = new KreditPage();
         this.kreditFormPage = new KreditFormPage();
         this.continueKreditFormPage = new ContinueKreditFormPage();
-        this.preconditions = new Preconditions();
-        this.postConditions = new PostConditions();
-    }
-
-    @BeforeEach
-    public  void  setUp() {
-        preconditions.openChrome();
-        preconditions.goToUrl();
-    }
-
-    @AfterEach
-    public  void  tearDown() {
-        postConditions.clearCookies();
-        postConditions.clearLocalStorage();
-        postConditions.closeBrowser();
     }
 
     @Test
@@ -92,6 +76,7 @@ private  String aboutSmsCodeText = "Код подтверждения отпра
         kreditFormPage.clickNextButton();
         kreditFormPage.checkConfirmationMessage(expectedMessage);
     }
+
     @ParameterizedTest
     @ValueSource(strings = {"915 303-45-123", "abf ddn-qr-qc", "яэо лдщ-йц-цх", "№; @&*-!`-~("})
     @Description("Ввод длинного значения и других недопустимых значений в поле мобильного телефона  ")

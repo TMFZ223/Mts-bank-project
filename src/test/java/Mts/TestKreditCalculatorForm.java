@@ -8,31 +8,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 @Epic("Тестирование формы кредитного калькулятора")
-public class TestKreditCalculatorForm {
+public class TestKreditCalculatorForm extends BaseTest {
     private  String expectedSum;
     private  MainPage mainPage;
     private KreditCalculatorPage kreditCalculatorPage;
-    private Preconditions preconditions;
-    private PostConditions postConditions;
 
     public TestKreditCalculatorForm() {
         this.mainPage = new MainPage();
         this.kreditCalculatorPage = new KreditCalculatorPage();
-        this.preconditions = new Preconditions();
-        this.postConditions = new PostConditions();
-    }
-
-    @BeforeEach
-    public void setUp() {
-        preconditions.openChrome();
-        preconditions.goToUrl();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        postConditions.clearCookies();
-        postConditions.clearLocalStorage();
-        postConditions.closeBrowser();
     }
 
     @ParameterizedTest
