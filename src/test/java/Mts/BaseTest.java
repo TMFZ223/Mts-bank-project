@@ -21,7 +21,7 @@ abstract class BaseTest {
         Configuration.webdriverLogsEnabled = true;
         Configuration.headless = true;
                 Configuration.browserSize = "1920x1080"; // открытие браузера в полноэкранном режиме
-        Configuration.timeout = 30000;
+        Configuration.timeout = 60000;
         open("https://www.mtsbank.ru/");
     }
 
