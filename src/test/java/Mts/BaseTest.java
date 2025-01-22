@@ -22,7 +22,6 @@ abstract class BaseTest {
         Configuration.headless = true;
                 Configuration.browserSize = "1920x1080"; // открытие браузера в полноэкранном режиме
         Configuration.timeout = 30000;
-        System.setProperty("chromeoptions.args", "\"--no-sandbox\",\"--disable-dev-shm-usage\",\"--remote-debugging-port=9222\",\"--headless\"");
         open("https://www.mtsbank.ru/");
     }
 
