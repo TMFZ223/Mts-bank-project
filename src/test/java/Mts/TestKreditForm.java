@@ -15,13 +15,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class TestKreditForm extends BaseTest {
     private String clientFio = "Сидоров Константин Егорович";
     private String clientBirdthdate = "24.01.2000";
-    private  String clientPhoneNumber = "915 220-29-38";
-    private  MainPage mainPage;
-    private  KreditPage kreditPage;
+    private String clientPhoneNumber = "915 220-29-38";
+    private MainPage mainPage;
+    private KreditPage kreditPage;
     private KreditFormPage kreditFormPage;
     private ContinueKreditFormPage continueKreditFormPage;
     private String expectedMessage;
-private  String aboutSmsCodeText = "Код подтверждения отправлен на номер +7 " + clientPhoneNumber;
+    private String aboutSmsCodeText = "Код подтверждения отправлен на номер +7 " + clientPhoneNumber;
 
     public TestKreditForm() {
         this.mainPage = new MainPage();
@@ -33,7 +33,7 @@ private  String aboutSmsCodeText = "Код подтверждения отпра
     @Test
     @Description("Позетивный тест с вводом валидных данных для оформления кредита наличными онлайн")
     @DisplayName("Позетивный тест с вводом валидных данных для оформления кредита наличными онлайн")
-    public  void  positiveTestKreditForm() {
+    public void positiveTestKreditForm() {
         mainPage.clickInterseptElement();
         mainPage.goKreditLink();
         kreditPage.GoloanCalcLink();
@@ -49,16 +49,16 @@ private  String aboutSmsCodeText = "Код подтверждения отпра
     @CsvSource({"'02.02.2005', 'Возраст клиента должен быть не менее 20 лет'", "'02.01.1954', 'Возраст клиента должен быть не более 70 лет'", "'', 'Обязательное поле'"})
     @Description("Анализ негативных граничных значений даты рождения при оформлении кредита наличными онлайн")
     @DisplayName("Анализ негативных граничных значений даты рождения при оформлении кредита наличными онлайн")
-    public  void testAnalysisOfNegativeBoundaryValuesOfDateOfBirth(String negativeClientBirdthdateValue, String expectedMessage) {
+    public void testAnalysisOfNegativeBoundaryValuesOfDateOfBirth(String negativeClientBirdthdateValue, String expectedMessage) {
         mainPage.clickInterseptElement();
         mainPage.goKreditLink();
         kreditPage.GoloanCalcLink();
         kreditFormPage.enterClientFio(clientFio);
         kreditFormPage.enterBirthdate(negativeClientBirdthdateValue);
         kreditFormPage.enterClientPhoneNumber(clientPhoneNumber);
-                kreditFormPage.setAllowProcessingConditionsCheckbox();
+        kreditFormPage.setAllowProcessingConditionsCheckbox();
         kreditFormPage.clickNextButton();
-                        kreditFormPage.checkConfirmationMessage(expectedMessage);
+        kreditFormPage.checkConfirmationMessage(expectedMessage);
     }
 
     @ParameterizedTest
@@ -93,12 +93,12 @@ private  String aboutSmsCodeText = "Код подтверждения отпра
             expectedPhoneNumberValue = "+7 ";
         }
         kreditFormPage.checkPhoneNumber(expectedPhoneNumberValue);
-            }
+    }
 
     @Test
     @Description("Оформление заявки без согласия с условиями рассмотрения")
     @DisplayName("Оформление заявки без согласия с условиями рассмотрения")
-        public  void testWithoutAllowPreconditions() {
+    public void testWithoutAllowPreconditions() {
         mainPage.clickInterseptElement();
         mainPage.goKreditLink();
         kreditPage.GoloanCalcLink();

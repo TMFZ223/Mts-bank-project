@@ -17,8 +17,8 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 @Epic("Тесты расчёта платежа по кредиту для недопустимой и допустимой суммы")
-public class TestCountKredit extends  BaseTest {
-private MainPage mainPage;
+public class TestCountKredit extends BaseTest {
+    private MainPage mainPage;
     private KreditCalculatorPage kreditCalculatorPage;
 
     private static Stream<Arguments> randomSmallKreditSumProvider() { // Генератор случайного числа для недопустимой суммы от 20000 до 5000000
@@ -31,27 +31,28 @@ private MainPage mainPage;
         String expectedConfirmationText = "Это срок для крупных кредитов";
         return Stream.of(Arguments.of(randomSum, expectedConfirmationText));
     }
+
     public TestCountKredit() {
         this.mainPage = new MainPage();
         this.kreditCalculatorPage = new KreditCalculatorPage();
     }
 
     @ParameterizedTest
-@ValueSource(strings = {"20000", "5000000"})
+    @ValueSource(strings = {"20000", "5000000"})
     @Description("Анализ негативных граничных значений для рассчёта суммы платежа для крупных кредитов на 7 лет")
     @DisplayName("Анализ негативных граничных значений для рассчёта суммы платежа для крупных кредитов на 7 лет")
-    public  void negativeTestCountKreditfor7years(String smallSum) {
+    public void negativeTestCountKreditfor7years(String smallSum) {
         mainPage.clickInterseptElement();
         mainPage.goCalculatorLink();
         kreditCalculatorPage.clearKreditSumInput();
         kreditCalculatorPage.enterKreditSum(smallSum);
         kreditCalculatorPage.changeKreditTime();
-      String  expectedConfirmationText = "Это срок для крупных кредитов";
+        String expectedConfirmationText = "Это срок для крупных кредитов";
         kreditCalculatorPage.checkConfirmationTextAboutBigKreditSum(expectedConfirmationText);
-            }
+    }
 
     @ParameterizedTest
-@MethodSource("randomSmallKreditSumProvider")
+    @MethodSource("randomSmallKreditSumProvider")
     @Description("Тест рассчёта кредита на 7 лет для недопустимой суммы от 20000 до 5000000. На вход подаётся случайное число в данном диапазоне")
     @DisplayName("Тест рассчёта платежа по кредиту на 7 лет для недопустимой суммы. На вход подаётся случайное число от 20000 до 5000000")
     public void negativeTestCountKreditfor7yearsRandomNumber(String randomSum, String expectedConfirmationText) {
@@ -64,7 +65,7 @@ private MainPage mainPage;
     }
 
     @ParameterizedTest
-    @CsvSource({"5000001, '85 349 ₽'", "15000000, '256 048 ₽'"})
+    @CsvSource({"5000001, '85 349 ₽'", "9048000, '154 448 ₽'", "15000000, '256 048 ₽'"})
     @Description("Тест рассчёта платежа по кредиту на 7 лет для допустимой суммы")
     @DisplayName("Тест рассчёта кредита на 7 лет для допустимой суммы")
     public void positiveTestCountKreditFor7Years(String normalKreditSum, String expectedMonthPay) {

@@ -3,6 +3,7 @@ package Mts;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+
 import static com.codeborne.selenide.Selenide.$x;
 
 public class KreditFormPage {
@@ -20,7 +21,7 @@ public class KreditFormPage {
     }
 
     @Step("Ввести в поле дата рождения значение {birthdate}")
-    public  void  enterBirthdate(String birthdate) {
+    public void enterBirthdate(String birthdate) {
         birthDateInput.scrollTo().hover().setValue(birthdate);
     }
 
@@ -29,10 +30,10 @@ public class KreditFormPage {
         phoneNumberInput.scrollTo().hover().setValue(phone);
     }
 
-        @Step("Отметить флажок согласия с условиями рассмотрения заявки")
-            public void setAllowProcessingConditionsCheckbox() {
+    @Step("Отметить флажок согласия с условиями рассмотрения заявки")
+    public void setAllowProcessingConditionsCheckbox() {
         allowProcessingConditionsCheckbox.scrollIntoView("{block: 'center'}");
-            allowProcessingConditionsCheckbox.shouldBe(Condition.clickable).click();
+        allowProcessingConditionsCheckbox.shouldBe(Condition.clickable).click();
     }
 
     @Step("Нажать на кнопку далее")
@@ -42,13 +43,13 @@ public class KreditFormPage {
     }
 
     @Step("Убедиться, что отображается сообщение: {message}")
-    public  void  checkConfirmationMessage(String message) {
+    public void checkConfirmationMessage(String message) {
         confirmationElement.scrollTo().hover();
         confirmationElement.shouldHave(Condition.text(message));
     }
 
     @Step("Убедиться, что в поле для ввода мобильного телефона введено значение {phone}")
-    public void  checkPhoneNumber(String phone) {
+    public void checkPhoneNumber(String phone) {
         phoneNumberInput.shouldHave(Condition.value(phone));
     }
 }

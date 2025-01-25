@@ -1,9 +1,10 @@
 package Mts;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Step;
-import static com.codeborne.selenide.Configuration.browser;
+
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
@@ -16,20 +17,32 @@ abstract class BaseTest {
     @BeforeEach
     @Step("Перейти на главную страницу https://www.mtsbank.ru/")
     public void setUp() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless", "--no-sandbox");
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        Configuration.browserCapabilities = capabilities;
+
         WebDriverManager.chromedriver().setup();
-        browser = "chrome";
+        Configuration.browser = "chrome";
         Configuration.webdriverLogsEnabled = true;
+        Configuration.browserSize = "1920x1080"; // открытие браузера в полноэкранном режиме
         Configuration.headless = true;
+<<<<<<< HEAD
+        Configuration.pageLoadTimeout = 70000;
+        Configuration.timeout = 30000;
+=======
                 Configuration.browserSize = "1920x1080"; // открытие браузера в полноэкранном режиме
         Configuration.timeout = 60000;
+>>>>>>> be19e3ed9e548a2685f28cbfd8e40fe36c304030
         open("https://www.mtsbank.ru/");
     }
 
     @AfterEach
     @Step("Очистить Куки, локальное хранилище и закрыть браузер")
     public void tearDown() {
-                clearBrowserCookies();
+        clearBrowserCookies();
         clearBrowserLocalStorage();
-closeWebDriver();
+        closeWebDriver();
     }
 }
