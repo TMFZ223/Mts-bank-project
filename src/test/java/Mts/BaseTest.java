@@ -30,7 +30,6 @@ abstract class BaseTest {
         Configuration.headless = true;
         Configuration.pageLoadTimeout = 70000;
         Configuration.timeout = 60000;
-        Configuration.pageLoadStrategy = "eager";
         open("https://www.mtsbank.ru/");
     }
 
