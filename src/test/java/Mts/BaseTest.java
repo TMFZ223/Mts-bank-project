@@ -18,7 +18,7 @@ abstract class BaseTest {
     @Step("Перейти на главную страницу https://www.mtsbank.ru/")
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--no-sandbox");
+        options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         Configuration.browserCapabilities = capabilities;
