@@ -6,10 +6,10 @@ import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class MapPage {
-    private SelenideElement filtersButton = $x("//div[@class='styled__Container-sc-1m80q5x-0 dbbrBq']/div[1]/div[1]"); // Элемент фильтров для объектов на карте
+    private SelenideElement filtersButton = $x("//div[@class='styled__MainRow-sc-c547a2c6-1 bmrlcA']"); // Элемент фильтров для объектов на карте
     private ElementsCollection filtersList = $$x("//label[input[@name='defaultName']]//div[@type='checkbox']"); // список фильтров
-    private SelenideElement listButton = $x("//div[@data-testid='tabsbar']//button[2]"); // Кнопка показа списком
-    private  ElementsCollection objects = $$x("//div[@class=\"styled__SmartText-n9vm43-0 gWGfyf styled__TextWithOverflow-sc-egp5sf-3 bxtWxp\"]"); // элементы, показывающие тип объекта
+    private SelenideElement listButton = $x("//button[@class='TabItem-sc-284dbe6b-4 kuAyes']"); // Кнопка показа списком
+    private  ElementsCollection objects = $$x("//div[@class='styled__MainDataTextContainer-sc-d623ef82-2 coNzXP']"); // элементы, показывающие тип объекта
 
     @Step("Кликнуть по фильтрам")
     public  void clickFiltersButton() {
