@@ -19,10 +19,10 @@ public class TestMap extends  BaseTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"8, 9, 10, 11, 'Офис'", "7, 9, 10, 11, 'Магазин'", "7, 8, 10, 11, 'Банкомат'", "7, 8, 9, 11, 'Терминал'", "7, 8, 9, 10, 'Банкомат'"})
+    @CsvSource({"8, 9, 10, 11, 'Объекты не найдены', 'Офис'", "7, 9, 10, 11, 'Объекты не найдены', 'Магазин'", "7, 8, 10, 11, 'Объекты не найдены', 'Банкомат'", "7, 8, 9, 11, 'Объекты не найдены', 'Терминал'", "7, 8, 9, 10, 'Объекты не найдены', 'Банкомат'"})
     @Description("Попарное тестирование фильтров (Экспериментальный вариант)")
     @DisplayName("Попарное тестирование фильтров (Экспериментальный вариант)")
-    public void testWorkingNowObjects(int filter1, int filter2, int filter3, int filter4, String expectedObjectType) {
+    public void testWorkingNowObjects(int filter1, int filter2, int filter3, int filter4, String expectedEmptyObjectElementText, String expectedObjectType) {
         /*
         Экспериментальный вариант демонстрации техники попарного тестирования.
         Поумолчанию активен фильтр Работает сейчас, а также в фильтре тип объекта отмечены все фильтры.
@@ -38,6 +38,6 @@ public class TestMap extends  BaseTest {
         mapPage.clickFiltersButton();
         mapPage.changeFilters(filter1, filter2, filter3, filter4);
         mapPage.clickListButton();
-        mapPage.checkTypeObject(expectedObjectType);
+        mapPage.checkTypeObject(expectedEmptyObjectElementText, expectedObjectType);
     }
 }
