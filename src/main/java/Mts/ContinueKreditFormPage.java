@@ -6,7 +6,7 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class ContinueKreditFormPage {
-    private SelenideElement smsCodeConfirmationElement = $x("//div[@class='styled__SmartText-n9vm43-0 bUwfLc']");
+    private SelenideElement smsCodeConfirmationElement = $x("//div[@class='styled__SmartText-sc-bd556393-0 kNbGij']");
 
     @Step("убедиться, что отображается сообщение: {confirmationAboutSmsCode}")
     public  void checkSmsConfirmationText(String confirmationAboutSmsCode) {
