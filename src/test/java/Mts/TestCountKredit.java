@@ -49,6 +49,8 @@ public class TestCountKredit extends BaseTest {
         kreditCalculatorPage.changeKreditTime();
         String expectedConfirmationText = "Это срок для крупных кредитов";
         kreditCalculatorPage.checkConfirmationTextAboutBigKreditSum(expectedConfirmationText);
+        kreditCalculatorPage.closeModelWindow();
+        kreditCalculatorPage.checkDisappearConfirmation();
     }
 
     @ParameterizedTest
@@ -62,18 +64,20 @@ public class TestCountKredit extends BaseTest {
         kreditCalculatorPage.enterKreditSum(randomSum);
         kreditCalculatorPage.changeKreditTime();
         kreditCalculatorPage.checkConfirmationTextAboutBigKreditSum(expectedConfirmationText);
+        kreditCalculatorPage.closeModelWindow();
+        kreditCalculatorPage.checkDisappearConfirmation();
     }
 
     @ParameterizedTest
-    @CsvSource({"5000001, '85 349 ₽'", "9048000, '154 448 ₽'", "15000000, '256 048 ₽'"})
+    @CsvSource({"5000001, '108 462 ₽', '85 349 ₽'", "9048000, '196 274 ₽', '154 448 ₽'", "15000000, '325 388 ₽', '256 048 ₽'"})
     @Description("Тест рассчёта платежа по кредиту на 7 лет для допустимой суммы")
     @DisplayName("Тест рассчёта кредита на 7 лет для допустимой суммы")
-    public void positiveTestCountKreditFor7Years(String normalKreditSum, String expectedMonthPay) {
+    public void positiveTestCountKreditFor7Years(String normalKreditSum, String fiveYearsPay, String expectedMonthPay) {
         mainPage.clickInterseptElement();
         mainPage.goCalculatorLink();
         kreditCalculatorPage.clearKreditSumInput();
         kreditCalculatorPage.enterKreditSum(normalKreditSum);
-        Selenide.sleep(10000);
+        kreditCalculatorPage.checkMonthPay(fiveYearsPay);
         kreditCalculatorPage.changeKreditTime();
         kreditCalculatorPage.checkMonthPay(expectedMonthPay);
     }
