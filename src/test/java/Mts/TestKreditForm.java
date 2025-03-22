@@ -27,7 +27,6 @@ public class TestKreditForm extends BaseTest {
     private KreditFormPage kreditFormPage;
     private ContinueKreditFormPage continueKreditFormPage;
     private String expectedMessage;
-    private String aboutSmsCodeText = "Код подтверждения отправлен на номер +7 " + clientPhoneNumber;
 
     private static Stream<Object[]> negativeDateProvider() {
         LocalDate oldDate = LocalDate.now().withYear(1954);
@@ -74,6 +73,7 @@ public class TestKreditForm extends BaseTest {
         kreditFormPage.enterClientPhoneNumber(randomPhone);
         kreditFormPage.setAllowProcessingConditionsCheckbox();
         kreditFormPage.clickNextButton();
+                String aboutSmsCodeText = "Код подтверждения отправлен на номер +7 " + randomPhone;
         continueKreditFormPage.checkSmsConfirmationText(aboutSmsCodeText);
     }
 
