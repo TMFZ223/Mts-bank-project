@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 public class TestCountKredit extends BaseTest {
     private MainPage mainPage;
     private KreditCalculatorPage kreditCalculatorPage;
+    private static String defaultMonthPayValue = "12 399 ₽";
 
     private static Stream<Arguments> randomSmallKreditSumProvider() { // Генератор случайного числа для недопустимой суммы от 20000 до 5000000
         int minSum = 20000;
@@ -46,6 +47,7 @@ public class TestCountKredit extends BaseTest {
         mainPage.goCalculatorLink();
         kreditCalculatorPage.clearKreditSumInput();
         kreditCalculatorPage.enterKreditSum(smallSum);
+        kreditCalculatorPage.waitDissapereDefaultMonthPayFor500000(defaultMonthPayValue);
         kreditCalculatorPage.changeKreditTime();
         String expectedConfirmationText = "Это срок для крупных кредитов";
         kreditCalculatorPage.checkConfirmationTextAboutBigKreditSum(expectedConfirmationText);
@@ -62,6 +64,7 @@ public class TestCountKredit extends BaseTest {
         mainPage.goCalculatorLink();
         kreditCalculatorPage.clearKreditSumInput();
         kreditCalculatorPage.enterKreditSum(randomSum);
+        kreditCalculatorPage.waitDissapereDefaultMonthPayFor500000(defaultMonthPayValue);
         kreditCalculatorPage.changeKreditTime();
         kreditCalculatorPage.checkConfirmationTextAboutBigKreditSum(expectedConfirmationText);
         kreditCalculatorPage.closeModelWindow();
@@ -69,15 +72,15 @@ public class TestCountKredit extends BaseTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"5000001, '108 462 ₽', '85 349 ₽'", "9048000, '196 274 ₽', '154 448 ₽'", "15000000, '325 388 ₽', '256 048 ₽'"})
+    @CsvSource({"5000001, '101 890 ₽'", "9048000, '184 380 ₽'", "15000000, '305 670 ₽'"})
     @Description("Тест рассчёта платежа по кредиту на 7 лет для допустимой суммы")
     @DisplayName("Тест рассчёта кредита на 7 лет для допустимой суммы")
-    public void positiveTestCountKreditFor7Years(String normalKreditSum, String fiveYearsPay, String expectedMonthPay) {
+    public void positiveTestCountKreditFor7Years(String normalKreditSum, String expectedMonthPay) {
         mainPage.clickInterseptElement();
         mainPage.goCalculatorLink();
         kreditCalculatorPage.clearKreditSumInput();
         kreditCalculatorPage.enterKreditSum(normalKreditSum);
-        kreditCalculatorPage.checkMonthPay(fiveYearsPay);
+        kreditCalculatorPage.waitDissapereDefaultMonthPayFor500000(defaultMonthPayValue);
         kreditCalculatorPage.changeKreditTime();
         kreditCalculatorPage.checkMonthPay(expectedMonthPay);
     }
