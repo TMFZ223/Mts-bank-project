@@ -58,6 +58,12 @@ public class KreditCalculatorPage {
         confirmationAboutBigKreditSum.shouldBe(Condition.disappear);
     }
 
+    @Step("Убедиться, что значение ежемесячного платежа поумолчанию равное {defaultMonthPay} для суммы 500 000 рублей исчезло")
+    public void waitDissapereDefaultMonthPayFor500000(String defaultMonthPay) {
+        monthPayElement.scrollIntoView("{block: 'center'}");
+        monthPayElement.shouldNotHave(Condition.text(defaultMonthPay));
+    }
+
     @Step("Убедиться, что ежемесячный платёж по кредиту составляет {monthPay}")
     public void checkMonthPay(String monthPay) {
         monthPayElement.scrollIntoView("{block: 'center'}");
